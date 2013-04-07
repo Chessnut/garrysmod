@@ -1,4 +1,3 @@
-
 if ( CLIENT ) then
 
 	--
@@ -49,7 +48,10 @@ if ( SERVER ) then
 			if ( !IsValid( client ) ) then return end
 
 			-- Hook.. can arn dupe..
-
+			if (hook.Run("CanArmDupe", client, true) == false) then
+				return;
+			end;
+			
 			local uncompressed = util.Decompress( data )
 			if ( !uncompressed ) then 
 				MsgN( "Couldn't decompress dupe!" )
@@ -61,6 +63,7 @@ if ( SERVER ) then
 			if ( !isvector( Dupe.Maxs ) ) then return end
 
 			client.CurrentDupe = Dupe;
+			client.CurrentDupeFromGame = false;
 
 			client:ConCommand( "gmod_tool duplicator" );
 
