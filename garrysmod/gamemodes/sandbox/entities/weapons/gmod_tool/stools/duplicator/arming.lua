@@ -1,4 +1,3 @@
-
 if ( CLIENT ) then
 
 	--
@@ -48,8 +47,12 @@ if ( SERVER ) then
 
 			if ( !IsValid( client ) ) then return end
 
-			-- Hook.. can arn dupe..
-
+			-- Hook.. can arm dupe..
+			-- Pass true so it is known the dupe is from Workshop.
+			if (hook.Run("CanArmDupe", client, true) == false) then
+				return;
+			end;
+			
 			local uncompressed = util.Decompress( data )
 			if ( !uncompressed ) then 
 				MsgN( "Couldn't decompress dupe!" )
