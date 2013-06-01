@@ -169,6 +169,15 @@ function PANEL:OnMousePressed( mousecode )
 
 end
 
+function PANEL:SizeToText(padding)
+	padding = padding or 8;
+	
+	surface.SetFont( self:GetFont() );
+	
+	local w, h = surface.GetTextSize( self:GetText() );
+	self:SetSize(w + padding, h + padding);
+end;
+
 --[[---------------------------------------------------------
 	OnMouseReleased
 -----------------------------------------------------------]]
